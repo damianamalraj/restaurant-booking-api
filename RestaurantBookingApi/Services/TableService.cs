@@ -13,7 +13,7 @@ namespace RestaurantBookingApi.Services
       _tableRepository = tableRepository;
     }
 
-    public async Task AddTableAsync(TableCreateDTO table)
+    public async Task AddTable(TableCreateDTO table)
     {
       await _tableRepository.AddTableAsync(new Table
       {
@@ -24,33 +24,39 @@ namespace RestaurantBookingApi.Services
 
     public async Task<Table> GetTable(int tableId)
     {
-      return await _tableRepository.GetTable(tableId);
+      return await _tableRepository.GetTableAsync(tableId);
     }
 
     public async Task<IEnumerable<Table>> GetTables()
     {
-      return await _tableRepository.GetTables();
+      return await _tableRepository.GetTablesAsync();
     }
 
-    public async Task<Table> UpdateTable(TableUpdateDTO table)
+    public async Task UpdateTable(TableUpdateDTO tableUpdateDto)
     {
-
-      var tableToUpdate = await _tableRepository.GetTable(table.Id);
+      var tableToUpdate = await _tableRepository.GetTableAsync(tableUpdateDto.TableId);
 
       if (tableToUpdate == null)
       {
-        return null;
+        return;
       }
 
-      tableToUpdate.TableNumber = table.TableNumber;
-      tableToUpdate.Seats = table.Seats;
+      tableToUpdate.TableNumber = tableUpdateDto.TableNumber;
+      tableToUpdate.Seats = tableUpdateDto.Seats;
 
-      return await _tableRepository.UpdateTable(tableToUpdate);
+      await _tableRepository.UpdateTableAsync(tableToUpdate);
     }
 
-    public async Task<Table> DeleteTable(int tableId)
+    public async Task DeleteTable(int tableId)
     {
-      return await _tableRepository.DeleteTable(tableId);
+      var tableToDelete = await _tableRepository.GetTableAsync(tableId);
+
+      if (tableToDelete == null)
+      {
+        return;
+      }
+
+      await _tableRepository.DeleteTableAsync(tableId);
     }
   }
 }

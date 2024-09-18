@@ -13,13 +13,37 @@ namespace RestaurantBookingApi.Services
       _customerRepository = customerRepository;
     }
 
-    public async Task AddCustomerAsync(CustomerCreateDTO customer)
+    public async Task AddCustomer(CustomerCreateDTO customer)
     {
       await _customerRepository.AddCustomerAsync(new Customer
       {
         Name = customer.Name,
         ContactInfo = customer.ContactInfo
       });
+    }
+
+    public async Task<Customer> GetCustomer(int customerId)
+    {
+      return await _customerRepository.GetCustomerAsync(customerId);
+    }
+
+    public async Task<IEnumerable<Customer>> GetCustomers()
+    {
+      return await _customerRepository.GetCustomersAsync();
+    }
+
+    public async Task UpdateCustomer(CustomerUpdateDTO customerUpdateDto)
+    {
+      var customer = await _customerRepository.GetCustomerAsync(customerUpdateDto.CustomerId);
+      customer.Name = customerUpdateDto.Name;
+      customer.ContactInfo = customerUpdateDto.ContactInfo;
+
+      await _customerRepository.UpdateCustomerAsync(customer);
+    }
+
+    public async Task DeleteCustomer(int customerId)
+    {
+      await _customerRepository.DeleteCustomerAsync(customerId);
     }
   }
 }

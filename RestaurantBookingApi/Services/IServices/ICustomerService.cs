@@ -4,10 +4,10 @@ namespace RestaurantBookingApi.Services.IServices
 {
   public interface ICustomerService
   {
-    Task AddCustomerAsync(CustomerCreateDTO customer);
-    // Task<Customer> GetCustomer(int customerId);
-    // Task<IEnumerable<Customer>> GetCustomers();
-    // Task<Customer> UpdateCustomer(Customer customer);
-    // Task<Customer> DeleteCustomer(int customerId);
+    Task AddCustomer(CustomerCreateDTO customer);
+    Task<Customer> GetCustomer(int customerId);
+    Task<IEnumerable<Customer>> GetCustomers();
+    Task UpdateCustomer(CustomerUpdateDTO customerUpdateDto);
+    Task DeleteCustomer(int customerId);
   }
 }

@@ -23,5 +23,36 @@ namespace RestaurantBookingApi.Services
       });
     }
 
+    public async Task<MenuItem> GetMenuItem(int menuItemId)
+    {
+      return await _menuItemRepository.GetMenuItemAsync(menuItemId);
+    }
+
+    public async Task<IEnumerable<MenuItem>> GetMenuItems()
+    {
+      return await _menuItemRepository.GetMenuItemsAsync();
+    }
+
+    public async Task UpdateMenuItem(MenuItemUpdateDTO menuItemUpdateDto)
+    {
+      var menuItemToUpdate = await _menuItemRepository.GetMenuItemAsync(menuItemUpdateDto.MenuItemId);
+
+      if (menuItemToUpdate == null)
+      {
+        return;
+      }
+
+      menuItemToUpdate.Name = menuItemUpdateDto.Name;
+      menuItemToUpdate.IsAvailable = menuItemUpdateDto.IsAvailable;
+      menuItemToUpdate.Price = menuItemUpdateDto.Price;
+
+      await _menuItemRepository.UpdateMenuItemAsync(menuItemToUpdate);
+    }
+
+    public async Task DeleteMenuItem(int menuItemId)
+    {
+      await _menuItemRepository.DeleteMenuItemAsync(menuItemId);
+    }
+
   }
 }

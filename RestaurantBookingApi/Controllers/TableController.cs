@@ -19,7 +19,7 @@ namespace RestaurantBookingApi.Controllers
     [Route("addTable")]
     public async Task<IActionResult> AddTable(TableCreateDTO tableCreateDto)
     {
-      await _tableService.AddTableAsync(tableCreateDto);
+      await _tableService.AddTable(tableCreateDto);
       return Created();
     }
 
@@ -41,14 +41,16 @@ namespace RestaurantBookingApi.Controllers
     [Route("updateTable")]
     public async Task<IActionResult> UpdateTable(TableUpdateDTO tableUpdateDto)
     {
-      return Ok(await _tableService.UpdateTable(tableUpdateDto));
+      await _tableService.UpdateTable(tableUpdateDto);
+      return NoContent();
     }
 
     [HttpDelete]
     [Route("deleteTable/{tableId}")]
     public async Task<IActionResult> DeleteTable(int tableId)
     {
-      return Ok(await _tableService.DeleteTable(tableId));
+      await _tableService.DeleteTable(tableId);
+      return NoContent();
     }
 
   }

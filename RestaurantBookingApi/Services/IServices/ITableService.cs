@@ -4,10 +4,10 @@ namespace RestaurantBookingApi.Services.IServices
 {
   public interface ITableService
   {
-    Task AddTableAsync(TableCreateDTO table);
+    Task AddTable(TableCreateDTO table);
     Task<Table> GetTable(int tableId);
     Task<IEnumerable<Table>> GetTables();
-    Task<Table> UpdateTable(TableUpdateDTO table);
-    Task<Table> DeleteTable(int tableId);
+    Task UpdateTable(TableUpdateDTO tableUpdateDto);
+    Task DeleteTable(int tableId);
   }
 }

@@ -1,13 +1,14 @@
+using Microsoft.AspNetCore.Mvc;
 using RestaurantBookingApi.Models.DTOs.Booking;
 
 namespace RestaurantBookingApi.Services.IServices
 {
   public interface IBookingService
   {
-    Task AddBookingAsync(BookingCreateDTO booking);
-    // Task<Booking> GetBooking(int bookingId);
-    // Task<IEnumerable<Booking>> GetBookings();
-    // Task<Booking> UpdateBooking(Booking booking);
-    // Task<Booking> DeleteBooking(int bookingId);
+    Task<IActionResult> AddBookingAsync(BookingCreateDTO bookingCreateDto);
+    Task<Booking> GetBookingAsync(int bookingId);
+    Task<IEnumerable<Booking>> GetBookingsAsync();
+    Task UpdateBookingAsync(BookingUpdateDTO bookingUpdateDto);
+    Task DeleteBookingAsync(int bookingId);
   }
 }

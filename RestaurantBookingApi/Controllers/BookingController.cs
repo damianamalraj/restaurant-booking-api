@@ -19,8 +19,37 @@ namespace RestaurantBookingApi.Controllers
     [Route("addBooking")]
     public async Task<IActionResult> AddBooking(BookingCreateDTO bookingCreateDto)
     {
-      await _bookingService.AddBookingAsync(bookingCreateDto);
-      return Created();
+      return await _bookingService.AddBookingAsync(bookingCreateDto);
+    }
+
+    [HttpGet]
+    [Route("getBookings")]
+    public async Task<IActionResult> GetBookings()
+    {
+      return Ok(await _bookingService.GetBookingsAsync());
+    }
+
+    [HttpGet]
+    [Route("getBooking/{bookingId}")]
+    public async Task<IActionResult> GetBooking(int bookingId)
+    {
+      return Ok(await _bookingService.GetBookingAsync(bookingId));
+    }
+
+    [HttpPut]
+    [Route("updateBooking")]
+    public async Task<IActionResult> UpdateBooking(BookingUpdateDTO bookingUpdateDto)
+    {
+      await _bookingService.UpdateBookingAsync(bookingUpdateDto);
+      return NoContent();
+    }
+
+    [HttpDelete]
+    [Route("deleteBooking/{bookingId}")]
+    public async Task<IActionResult> DeleteBooking(int bookingId)
+    {
+      await _bookingService.DeleteBookingAsync(bookingId);
+      return NoContent();
     }
   }
 }

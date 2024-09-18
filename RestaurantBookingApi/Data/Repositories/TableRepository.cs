@@ -18,34 +18,32 @@ namespace RestaurantBookingApi.Data.Repositories
       await _context.SaveChangesAsync();
     }
 
-    public async Task<Table> GetTable(int tableId)
+    public async Task<Table> GetTableAsync(int tableId)
     {
       return await _context.Tables.FindAsync(tableId);
     }
 
-    public async Task<IEnumerable<Table>> GetTables()
+    public async Task<IEnumerable<Table>> GetTablesAsync()
     {
       return await _context.Tables.ToListAsync();
     }
 
-    public async Task<Table> UpdateTable(Table table)
+    public async Task UpdateTableAsync(Table table)
     {
       _context.Tables.Update(table);
       await _context.SaveChangesAsync();
-      return table;
     }
 
-    public async Task<Table> DeleteTable(int tableId)
+    public async Task DeleteTableAsync(int tableId)
     {
       var table = await _context.Tables.FindAsync(tableId);
       if (table == null)
       {
-        return null;
+        return;
       }
 
       _context.Tables.Remove(table);
       await _context.SaveChangesAsync();
-      return table;
     }
   }
 }
