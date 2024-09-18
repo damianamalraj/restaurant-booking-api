@@ -23,5 +23,33 @@ namespace RestaurantBookingApi.Controllers
       return Created();
     }
 
+    [HttpGet]
+    [Route("getTables")]
+    public async Task<IActionResult> GetTables()
+    {
+      return Ok(await _tableService.GetTables());
+    }
+
+    [HttpGet]
+    [Route("getTable/{tableId}")]
+    public async Task<IActionResult> GetTable(int tableId)
+    {
+      return Ok(await _tableService.GetTable(tableId));
+    }
+
+    [HttpPut]
+    [Route("updateTable")]
+    public async Task<IActionResult> UpdateTable(TableUpdateDTO tableUpdateDto)
+    {
+      return Ok(await _tableService.UpdateTable(tableUpdateDto));
+    }
+
+    [HttpDelete]
+    [Route("deleteTable/{tableId}")]
+    public async Task<IActionResult> DeleteTable(int tableId)
+    {
+      return Ok(await _tableService.DeleteTable(tableId));
+    }
+
   }
 }

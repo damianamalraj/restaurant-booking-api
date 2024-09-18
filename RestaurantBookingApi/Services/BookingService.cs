@@ -19,8 +19,8 @@ namespace RestaurantBookingApi.Services
       await _bookingRepository.AddBookingAsync(new Booking
       {
         CustomerId = booking.CustomerId,
-        Date = booking.Date,
-        Time = booking.Time,
+        TableId = booking.TableId,
+        BookingDate = booking.BookingDate,
         NumberOfPeople = booking.NumberOfPeople
       });
     }

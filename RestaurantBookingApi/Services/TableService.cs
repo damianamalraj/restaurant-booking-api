@@ -21,5 +21,36 @@ namespace RestaurantBookingApi.Services
         Seats = table.Seats
       });
     }
+
+    public async Task<Table> GetTable(int tableId)
+    {
+      return await _tableRepository.GetTable(tableId);
+    }
+
+    public async Task<IEnumerable<Table>> GetTables()
+    {
+      return await _tableRepository.GetTables();
+    }
+
+    public async Task<Table> UpdateTable(TableUpdateDTO table)
+    {
+
+      var tableToUpdate = await _tableRepository.GetTable(table.Id);
+
+      if (tableToUpdate == null)
+      {
+        return null;
+      }
+
+      tableToUpdate.TableNumber = table.TableNumber;
+      tableToUpdate.Seats = table.Seats;
+
+      return await _tableRepository.UpdateTable(tableToUpdate);
+    }
+
+    public async Task<Table> DeleteTable(int tableId)
+    {
+      return await _tableRepository.DeleteTable(tableId);
+    }
   }
 }
