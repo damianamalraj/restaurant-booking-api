@@ -33,9 +33,9 @@ namespace RestaurantBookingApi.Services
       return await _menuItemRepository.GetMenuItemsAsync();
     }
 
-    public async Task UpdateMenuItem(MenuItemUpdateDTO menuItemUpdateDto)
+    public async Task UpdateMenuItem(int menuItemId, MenuItemUpdateDTO menuItemUpdateDto)
     {
-      var menuItemToUpdate = await _menuItemRepository.GetMenuItemAsync(menuItemUpdateDto.MenuItemId);
+      var menuItemToUpdate = await _menuItemRepository.GetMenuItemAsync(menuItemId);
 
       if (menuItemToUpdate == null)
       {

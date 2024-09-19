@@ -21,7 +21,7 @@ namespace RestaurantBookingApi.Services
 
     public async Task<IActionResult> AddBookingAsync(BookingCreateDTO bookingCreateDto)
     {
-      var table = await _tableRepository.GetTableAsync(bookingCreateDto.TableId);
+      var table = await _tableRepository.GetTableWithBookingsAsync(bookingCreateDto.TableId);
 
       if (table == null)
       {
@@ -33,8 +33,7 @@ namespace RestaurantBookingApi.Services
         return new BadRequestObjectResult("Table does not have enough seats");
       }
 
-      var existingBooking = await _bookingRepository.GetBookingsAsync();
-      if (existingBooking.Any(b => b.TableId == bookingCreateDto.TableId && b.BookingDate.Date == bookingCreateDto.BookingDate.Date))
+      if (table.Bookings != null && table.Bookings.Any(b => b.BookingDate.Date == bookingCreateDto.BookingDate.Date))
       {
         return new ConflictObjectResult("Table is already booked for this date");
       }
@@ -60,9 +59,9 @@ namespace RestaurantBookingApi.Services
       return await _bookingRepository.GetBookingsAsync();
     }
 
-    public async Task UpdateBookingAsync(BookingUpdateDTO bookingUpdateDto)
+    public async Task UpdateBookingAsync(int bookingId, BookingUpdateDTO bookingUpdateDto)
     {
-      var booking = await _bookingRepository.GetBookingAsync(bookingUpdateDto.BookingId);
+      var booking = await _bookingRepository.GetBookingAsync(bookingId);
       booking.CustomerId = bookingUpdateDto.CustomerId;
       booking.TableId = bookingUpdateDto.TableId;
       booking.BookingDate = bookingUpdateDto.BookingDate;

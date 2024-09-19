@@ -7,7 +7,7 @@ namespace RestaurantBookingApi.Services.IServices
     Task AddMenuItemAsync(MenuItemCreateDTO menuItem);
     Task<MenuItem> GetMenuItem(int menuItemId);
     Task<IEnumerable<MenuItem>> GetMenuItems();
-    Task UpdateMenuItem(MenuItemUpdateDTO menuItemUpdateDto);
+    Task UpdateMenuItem(int menuItemId, MenuItemUpdateDTO menuItemUpdateDto);
     Task DeleteMenuItem(int menuItemId);
   }
 }

@@ -45,5 +45,17 @@ namespace RestaurantBookingApi.Data.Repositories
       _context.Tables.Remove(table);
       await _context.SaveChangesAsync();
     }
+
+    public async Task<Table> GetTableWithBookingsAsync(int tableId)
+    {
+      return await _context.Tables
+                  .Include(t => t.Bookings)
+                  .FirstOrDefaultAsync(t => t.Id == tableId);
+    }
+
+    public async Task<bool> TableExistsAsync(int tableNumber)
+    {
+      return await _context.Tables.AnyAsync(t => t.TableNumber == tableNumber);
+    }
   }
 }

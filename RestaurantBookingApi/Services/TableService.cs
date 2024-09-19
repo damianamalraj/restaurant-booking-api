@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using RestaurantBookingApi.Data.Repositories.IRepositories;
 using RestaurantBookingApi.Models.DTOs.Table;
 using RestaurantBookingApi.Services.IServices;
@@ -13,13 +14,22 @@ namespace RestaurantBookingApi.Services
       _tableRepository = tableRepository;
     }
 
-    public async Task AddTable(TableCreateDTO table)
+    public async Task<IActionResult> AddTable(TableCreateDTO table)
     {
+      var tableExists = await _tableRepository.TableExistsAsync(table.TableNumber);
+
+      if (tableExists)
+      {
+        return new ConflictObjectResult("Table is already added");
+      }
+
       await _tableRepository.AddTableAsync(new Table
       {
         TableNumber = table.TableNumber,
         Seats = table.Seats
       });
+
+      return new CreatedResult();
     }
 
     public async Task<Table> GetTable(int tableId)
@@ -32,9 +42,9 @@ namespace RestaurantBookingApi.Services
       return await _tableRepository.GetTablesAsync();
     }
 
-    public async Task UpdateTable(TableUpdateDTO tableUpdateDto)
+    public async Task UpdateTable(int tableId, TableUpdateDTO tableUpdateDto)
     {
-      var tableToUpdate = await _tableRepository.GetTableAsync(tableUpdateDto.TableId);
+      var tableToUpdate = await _tableRepository.GetTableAsync(tableId);
 
       if (tableToUpdate == null)
       {

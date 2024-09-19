@@ -32,9 +32,9 @@ namespace RestaurantBookingApi.Services
       return await _customerRepository.GetCustomersAsync();
     }
 
-    public async Task UpdateCustomer(CustomerUpdateDTO customerUpdateDto)
+    public async Task UpdateCustomer(int customerId, CustomerUpdateDTO customerUpdateDto)
     {
-      var customer = await _customerRepository.GetCustomerAsync(customerUpdateDto.CustomerId);
+      var customer = await _customerRepository.GetCustomerAsync(customerId);
       customer.Name = customerUpdateDto.Name;
       customer.ContactInfo = customerUpdateDto.ContactInfo;
 

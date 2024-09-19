@@ -7,7 +7,7 @@ namespace RestaurantBookingApi.Services.IServices
     Task AddCustomer(CustomerCreateDTO customer);
     Task<Customer> GetCustomer(int customerId);
     Task<IEnumerable<Customer>> GetCustomers();
-    Task UpdateCustomer(CustomerUpdateDTO customerUpdateDto);
+    Task UpdateCustomer(int customerId, CustomerUpdateDTO customerUpdateDto);
     Task DeleteCustomer(int customerId);
   }
 }

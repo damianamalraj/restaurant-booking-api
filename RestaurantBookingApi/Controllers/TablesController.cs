@@ -6,47 +6,44 @@ namespace RestaurantBookingApi.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
-  public class TableController : ControllerBase
+  public class TablesController : ControllerBase
   {
     private readonly ITableService _tableService;
 
-    public TableController(ITableService tableService)
+    public TablesController(ITableService tableService)
     {
       _tableService = tableService;
     }
 
     [HttpPost]
-    [Route("addTable")]
     public async Task<IActionResult> AddTable(TableCreateDTO tableCreateDto)
     {
-      await _tableService.AddTable(tableCreateDto);
-      return Created();
+      return await _tableService.AddTable(tableCreateDto);
     }
 
     [HttpGet]
-    [Route("getTables")]
     public async Task<IActionResult> GetTables()
     {
       return Ok(await _tableService.GetTables());
     }
 
     [HttpGet]
-    [Route("getTable/{tableId}")]
+    [Route("{tableId}")]
     public async Task<IActionResult> GetTable(int tableId)
     {
       return Ok(await _tableService.GetTable(tableId));
     }
 
     [HttpPut]
-    [Route("updateTable")]
-    public async Task<IActionResult> UpdateTable(TableUpdateDTO tableUpdateDto)
+    [Route("{tableId}")]
+    public async Task<IActionResult> UpdateTable(int tableId, TableUpdateDTO tableUpdateDto)
     {
-      await _tableService.UpdateTable(tableUpdateDto);
+      await _tableService.UpdateTable(tableId, tableUpdateDto);
       return NoContent();
     }
 
     [HttpDelete]
-    [Route("deleteTable/{tableId}")]
+    [Route("{tableId}")]
     public async Task<IActionResult> DeleteTable(int tableId)
     {
       await _tableService.DeleteTable(tableId);
