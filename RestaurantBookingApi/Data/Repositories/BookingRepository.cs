@@ -45,5 +45,12 @@ namespace RestaurantBookingApi.Data.Repositories
       _context.Bookings.Remove(booking);
       await _context.SaveChangesAsync();
     }
+
+    public async Task<bool> BookingExistsAsync(int tableId, DateTime startBookingDateTime)
+    {
+      DateTime endBookingDateTime = startBookingDateTime.AddHours(2);
+      return await _context.Bookings.AnyAsync(b => b.TableId == tableId &&
+        b.StartBookingDateTime < endBookingDateTime && b.EndBookingDateTime > startBookingDateTime);
+    }
   }
 }

@@ -18,7 +18,7 @@ namespace RestaurantBookingApi.Services
       await _customerRepository.AddCustomerAsync(new Customer
       {
         Name = customer.Name,
-        ContactInfo = customer.ContactInfo
+        Email = customer.Email
       });
     }
 
@@ -36,7 +36,7 @@ namespace RestaurantBookingApi.Services
     {
       var customer = await _customerRepository.GetCustomerAsync(customerId);
       customer.Name = customerUpdateDto.Name;
-      customer.ContactInfo = customerUpdateDto.ContactInfo;
+      customer.Email = customerUpdateDto.Email;
 
       await _customerRepository.UpdateCustomerAsync(customer);
     }

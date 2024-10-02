@@ -33,16 +33,18 @@ namespace RestaurantBookingApi.Services
         return new BadRequestObjectResult("Table does not have enough seats");
       }
 
-      if (table.Bookings != null && table.Bookings.Any(b => b.BookingDate.Date == bookingCreateDto.BookingDate.Date))
+      var bookingExists = await _bookingRepository.BookingExistsAsync(bookingCreateDto.TableId, bookingCreateDto.StartBookingDateTime);
+      if (bookingExists)
       {
-        return new ConflictObjectResult("Table is already booked for this date");
+        return new ConflictObjectResult("Table is already booked for this date and time");
       }
 
       await _bookingRepository.AddBookingAsync(new Booking
       {
         CustomerId = bookingCreateDto.CustomerId,
         TableId = bookingCreateDto.TableId,
-        BookingDate = bookingCreateDto.BookingDate,
+        StartBookingDateTime = bookingCreateDto.StartBookingDateTime,
+        EndBookingDateTime = bookingCreateDto.StartBookingDateTime.AddHours(2),
         NumberOfPeople = bookingCreateDto.NumberOfPeople
       });
 
@@ -64,7 +66,8 @@ namespace RestaurantBookingApi.Services
       var booking = await _bookingRepository.GetBookingAsync(bookingId);
       booking.CustomerId = bookingUpdateDto.CustomerId;
       booking.TableId = bookingUpdateDto.TableId;
-      booking.BookingDate = bookingUpdateDto.BookingDate;
+      booking.StartBookingDateTime = bookingUpdateDto.StartBookingDateTime;
+      booking.EndBookingDateTime = bookingUpdateDto.StartBookingDateTime.AddHours(2);
       booking.NumberOfPeople = bookingUpdateDto.NumberOfPeople;
 
       await _bookingRepository.UpdateBookingAsync(booking);

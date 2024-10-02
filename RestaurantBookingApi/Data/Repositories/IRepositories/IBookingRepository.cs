@@ -7,5 +7,6 @@ namespace RestaurantBookingApi.Data.Repositories.IRepositories
     Task<IEnumerable<Booking>> GetBookingsAsync();
     Task UpdateBookingAsync(Booking booking);
     Task DeleteBookingAsync(int bookingId);
+    Task<bool> BookingExistsAsync(int tableId, DateTime startBookingDateTime);
   }
 }
