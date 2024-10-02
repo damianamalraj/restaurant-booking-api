@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0SGsAmwGQzNzhwe0e49bzAx/GgCCag178TgIaWgagKDm5aYFqWlHcPrW9W/eJM8w+z+AOwoKwQjqGcC7wpyhGw==",
+  "dgSpecHash": "YNZuFVwrQE9UQDNjRyAbQh/dJrmcyPYXLN1xsBWdUP+zVD4LOHxwtxWeacXdWE2CkhpPucCuf622K9DC7CBrbA==",
   "success": true,
-  "projectFilePath": "/Users/damianamalraj/Documents/Development/RestaurantBookingApi/RestaurantBookingApi/RestaurantBookingApi.csproj",
+  "projectFilePath": "/Users/damianamalraj/Documents/Development/RestaurantBookingApi/RestaurantBookingApi.csproj",
   "expectedPackageFiles": [
     "/Users/damianamalraj/.nuget/packages/azure.core/1.35.0/azure.core.1.35.0.nupkg.sha512",
     "/Users/damianamalraj/.nuget/packages/azure.identity/1.10.3/azure.identity.1.10.3.nupkg.sha512",

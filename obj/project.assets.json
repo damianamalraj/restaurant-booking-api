@@ -4539,11 +4539,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/damianamalraj/Documents/Development/RestaurantBookingApi/RestaurantBookingApi/RestaurantBookingApi.csproj",
+      "projectUniqueName": "/Users/damianamalraj/Documents/Development/RestaurantBookingApi/RestaurantBookingApi.csproj",
       "projectName": "RestaurantBookingApi",
-      "projectPath": "/Users/damianamalraj/Documents/Development/RestaurantBookingApi/RestaurantBookingApi/RestaurantBookingApi.csproj",
+      "projectPath": "/Users/damianamalraj/Documents/Development/RestaurantBookingApi/RestaurantBookingApi.csproj",
       "packagesPath": "/Users/damianamalraj/.nuget/packages/",
-      "outputPath": "/Users/damianamalraj/Documents/Development/RestaurantBookingApi/RestaurantBookingApi/obj/",
+      "outputPath": "/Users/damianamalraj/Documents/Development/RestaurantBookingApi/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/damianamalraj/.nuget/NuGet/NuGet.Config"
