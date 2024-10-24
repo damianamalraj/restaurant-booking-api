@@ -23,6 +23,11 @@ namespace RestaurantBookingApi.Data.Repositories
       return await _context.Customers.FindAsync(id);
     }
 
+    public async Task<Customer> GetCustomerForBookingAsync(string email)
+    {
+      return await _context.Customers.FirstOrDefaultAsync(c => c.Email == email);
+    }
+
     public async Task<IEnumerable<Customer>> GetCustomersAsync()
     {
       return await _context.Customers.ToListAsync();

@@ -19,7 +19,8 @@ namespace RestaurantBookingApi.Services
       {
         Name = menuItem.Name,
         IsAvailable = menuItem.IsAvailable,
-        Price = menuItem.Price
+        Price = menuItem.Price,
+        IsPopular = menuItem.IsPopular
       });
     }
 
@@ -45,6 +46,7 @@ namespace RestaurantBookingApi.Services
       menuItemToUpdate.Name = menuItemUpdateDto.Name;
       menuItemToUpdate.IsAvailable = menuItemUpdateDto.IsAvailable;
       menuItemToUpdate.Price = menuItemUpdateDto.Price;
+      menuItemToUpdate.IsPopular = menuItemUpdateDto.IsPopular;
 
       await _menuItemRepository.UpdateMenuItemAsync(menuItemToUpdate);
     }

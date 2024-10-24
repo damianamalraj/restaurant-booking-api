@@ -8,7 +8,7 @@ namespace RestaurantBookingApi.Services.IServices
     Task<IActionResult> AddBookingAsync(BookingCreateDTO bookingCreateDto);
     Task<Booking> GetBookingAsync(int bookingId);
     Task<IEnumerable<Booking>> GetBookingsAsync();
-    Task UpdateBookingAsync(int bookingId, BookingUpdateDTO bookingUpdateDto);
+    Task<IActionResult> UpdateBookingAsync(int bookingId, BookingUpdateDTO bookingUpdateDto);
     Task DeleteBookingAsync(int bookingId);
   }
 }

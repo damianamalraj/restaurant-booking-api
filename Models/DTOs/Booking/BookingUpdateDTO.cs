@@ -2,8 +2,8 @@ namespace RestaurantBookingApi.Models.DTOs.Booking
 {
   public class BookingUpdateDTO
   {
-    public int TableId { get; set; }
-    public int CustomerId { get; set; }
+    public int TableNumber { get; set; }
+    public string? CustomerEmail { get; set; }
     public DateTime StartBookingDateTime { get; set; }
     public int NumberOfPeople { get; set; }
   }
