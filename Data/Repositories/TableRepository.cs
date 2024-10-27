@@ -46,11 +46,11 @@ namespace RestaurantBookingApi.Data.Repositories
       await _context.SaveChangesAsync();
     }
 
-    public async Task<Table> GetTableWithBookingsAsync(int tableId)
+    public async Task<Table> GetTableWithTableNumberAsync(int tableNumber)
     {
       return await _context.Tables
                   .Include(t => t.Bookings)
-                  .FirstOrDefaultAsync(t => t.Id == tableId);
+                  .FirstOrDefaultAsync(t => t.TableNumber == tableNumber);
     }
 
     public async Task<bool> TableExistsAsync(int tableNumber)

@@ -8,7 +8,7 @@ namespace RestaurantBookingApi.Data.Repositories.IRepositories
     Task UpdateTableAsync(Table table);
     Task DeleteTableAsync(int tableId);
 
-    Task<Table> GetTableWithBookingsAsync(int tableId);
+    Task<Table> GetTableWithTableNumberAsync(int tableNumber);
     Task<bool> TableExistsAsync(int tableNumber);
   }
 }

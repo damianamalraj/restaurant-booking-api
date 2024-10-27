@@ -22,7 +22,18 @@ namespace RestaurantBookingApi.Services
 
     public async Task<IActionResult> AddBookingAsync(BookingCreateDTO bookingCreateDto)
     {
-      var table = await _tableRepository.GetTableWithBookingsAsync(bookingCreateDto.TableNumber);
+      var table = await _tableRepository.GetTableWithTableNumberAsync(bookingCreateDto.TableNumber);
+      var customer = await _customerRepository.GetCustomerForBookingAsync(bookingCreateDto.CustomerEmail);
+      var bookingExists = await _bookingRepository.BookingExistsAsync(bookingCreateDto.TableNumber, bookingCreateDto.StartBookingDateTime);
+
+      if (customer == null)
+      {
+        await _customerRepository.AddCustomerAsync(new Customer
+        {
+          Name = bookingCreateDto.CustomerName,
+          Email = bookingCreateDto.CustomerEmail
+        });
+      }
 
       if (table == null)
       {
@@ -34,30 +45,26 @@ namespace RestaurantBookingApi.Services
         return new BadRequestObjectResult("Table does not have enough seats");
       }
 
-      var bookingExists = await _bookingRepository.BookingExistsAsync(bookingCreateDto.TableNumber, bookingCreateDto.StartBookingDateTime);
       if (bookingExists)
       {
         return new ConflictObjectResult("Table is already booked for this date and time");
       }
 
-      var customer = await _customerRepository.GetCustomerForBookingAsync(bookingCreateDto.CustomerEmail);
-
       if (customer == null)
       {
-        await _customerRepository.AddCustomerAsync(new Customer
-        {
-          Name = bookingCreateDto.CustomerName,
-          Email = bookingCreateDto.CustomerEmail
-        });
+        customer = await _customerRepository.GetCustomerForBookingAsync(bookingCreateDto.CustomerEmail);
       }
 
       await _bookingRepository.AddBookingAsync(new Booking
       {
         CustomerId = customer.Id,
-        TableId = bookingCreateDto.TableNumber,
+        TableId = table.Id,
+        TableNumber = table.TableNumber,
+        CustomerName = customer.Name,
+        CustomerEmail = customer.Email,
+        NumberOfPeople = bookingCreateDto.NumberOfPeople,
         StartBookingDateTime = bookingCreateDto.StartBookingDateTime,
         EndBookingDateTime = bookingCreateDto.StartBookingDateTime.AddHours(2),
-        NumberOfPeople = bookingCreateDto.NumberOfPeople
       });
 
       return new CreatedResult();
@@ -76,9 +83,23 @@ namespace RestaurantBookingApi.Services
     public async Task<IActionResult> UpdateBookingAsync(int bookingId, BookingUpdateDTO bookingUpdateDto)
     {
       var booking = await _bookingRepository.GetBookingAsync(bookingId);
+      var table = await _tableRepository.GetTableWithTableNumberAsync(bookingUpdateDto.TableNumber);
+      var bookingExists = await _bookingRepository.BookingExistsAsync(bookingUpdateDto.TableNumber, bookingUpdateDto.StartBookingDateTime);
       var customer = await _customerRepository.GetCustomerForBookingAsync(bookingUpdateDto.CustomerEmail);
 
-      var table = await _tableRepository.GetTableWithBookingsAsync(bookingUpdateDto.TableNumber);
+      if (customer == null)
+      {
+        await _customerRepository.AddCustomerAsync(new Customer
+        {
+          Name = bookingUpdateDto.CustomerName,
+          Email = bookingUpdateDto.CustomerEmail
+        });
+      }
+      else
+      {
+        customer.Name = bookingUpdateDto.CustomerName;
+        await _customerRepository.UpdateCustomerAsync(customer);
+      }
 
       if (table == null)
       {
@@ -90,17 +111,24 @@ namespace RestaurantBookingApi.Services
         return new BadRequestObjectResult("Table does not have enough seats");
       }
 
-      var bookingExists = await _bookingRepository.BookingExistsAsync(bookingUpdateDto.TableNumber, bookingUpdateDto.StartBookingDateTime);
       if (bookingExists)
       {
         return new ConflictObjectResult("Table is already booked for this date and time");
       }
 
+      if (customer == null)
+      {
+        customer = await _customerRepository.GetCustomerForBookingAsync(bookingUpdateDto.CustomerEmail);
+      }
+
       booking.CustomerId = customer.Id;
-      booking.TableId = bookingUpdateDto.TableNumber;
+      booking.TableId = table.Id;
+      booking.TableNumber = table.TableNumber;
+      booking.CustomerName = customer.Name;
+      booking.CustomerEmail = customer.Email;
+      booking.NumberOfPeople = bookingUpdateDto.NumberOfPeople;
       booking.StartBookingDateTime = bookingUpdateDto.StartBookingDateTime;
       booking.EndBookingDateTime = bookingUpdateDto.StartBookingDateTime.AddHours(2);
-      booking.NumberOfPeople = bookingUpdateDto.NumberOfPeople;
 
       await _bookingRepository.UpdateBookingAsync(booking);
 
