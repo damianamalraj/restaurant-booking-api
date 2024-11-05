@@ -274,3 +274,13 @@
 /Users/damianamalraj/Documents/Development/RestaurantBookingApi/obj/Debug/net8.0/RestaurantBookingApi.pdb
 /Users/damianamalraj/Documents/Development/RestaurantBookingApi/obj/Debug/net8.0/RestaurantBookingApi.genruntimeconfig.cache
 /Users/damianamalraj/Documents/Development/RestaurantBookingApi/obj/Debug/net8.0/ref/RestaurantBookingApi.dll
+/Users/damianamalraj/Documents/Development/RestaurantBookingApi/bin/Debug/net8.0/Microsoft.AspNetCore.Cryptography.Internal.dll
+/Users/damianamalraj/Documents/Development/RestaurantBookingApi/bin/Debug/net8.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+/Users/damianamalraj/Documents/Development/RestaurantBookingApi/bin/Debug/net8.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/Users/damianamalraj/Documents/Development/RestaurantBookingApi/bin/Debug/net8.0/Microsoft.Extensions.Identity.Core.dll
+/Users/damianamalraj/Documents/Development/RestaurantBookingApi/bin/Debug/net8.0/Microsoft.Extensions.Identity.Stores.dll
+/Users/damianamalraj/Documents/Development/RestaurantBookingApi/bin/Debug/net8.0/Microsoft.Extensions.Options.dll
+/Users/damianamalraj/Documents/Development/RestaurantBookingApi/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/damianamalraj/Documents/Development/RestaurantBookingApi/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.Google.dll
+/Users/damianamalraj/Documents/Development/RestaurantBookingApi/bin/Debug/net8.0/Azure.Communication.Email.dll
+/Users/damianamalraj/Documents/Development/RestaurantBookingApi/bin/Debug/net8.0/System.ClientModel.dll
