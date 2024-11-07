@@ -68,5 +68,10 @@ namespace RestaurantBookingApi.Services
 
       await _tableRepository.DeleteTableAsync(tableId);
     }
+
+    public async Task<IEnumerable<Table>> GetAvailableTables(int numberOfPeople, DateTime startBookingDateTime)
+    {
+      return await _tableRepository.GetAvailableTablesAsync(numberOfPeople, startBookingDateTime);
+    }
   }
 }

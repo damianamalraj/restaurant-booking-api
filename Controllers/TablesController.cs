@@ -50,5 +50,11 @@ namespace RestaurantBookingApi.Controllers
       return NoContent();
     }
 
+    [HttpPost]
+    [Route("available")]
+    public async Task<IActionResult> GetAvailableTables(AvailableTablesDTO availableTablesDto)
+    {
+      return Ok(await _tableService.GetAvailableTables(availableTablesDto.NumberOfPeople, availableTablesDto.StartBookingDateTime));
+    }
   }
 }

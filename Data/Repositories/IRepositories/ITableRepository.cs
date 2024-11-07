@@ -10,5 +10,6 @@ namespace RestaurantBookingApi.Data.Repositories.IRepositories
 
     Task<Table> GetTableWithTableNumberAsync(int tableNumber);
     Task<bool> TableExistsAsync(int tableNumber);
+    Task<IEnumerable<Table>> GetAvailableTablesAsync(int numberOfPeople, DateTime startBookingDateTime);
   }
 }

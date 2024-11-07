@@ -10,5 +10,6 @@ namespace RestaurantBookingApi.Services.IServices
     Task<IEnumerable<Table>> GetTables();
     Task UpdateTable(int tableId, TableUpdateDTO tableUpdateDto);
     Task DeleteTable(int tableId);
+    Task<IEnumerable<Table>> GetAvailableTables(int numberOfPeople, DateTime startBookingDateTime);
   }
 }
