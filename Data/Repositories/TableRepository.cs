@@ -57,5 +57,14 @@ namespace RestaurantBookingApi.Data.Repositories
     {
       return await _context.Tables.AnyAsync(t => t.TableNumber == tableNumber);
     }
+
+    public async Task<IEnumerable<Table>> GetAvailableTablesAsync(int numberOfPeople, DateTime startBookingDateTime)
+    {
+      DateTime endBookingDateTime = startBookingDateTime.AddHours(2);
+      return await _context.Tables
+                  .Where(t => t.Seats >= numberOfPeople &&
+                    !t.Bookings.Any(b => b.StartBookingDateTime <= endBookingDateTime && b.EndBookingDateTime >= startBookingDateTime))
+                  .ToListAsync();
+    }
   }
 }
